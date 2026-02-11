@@ -12,5 +12,14 @@ class AlumnoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Alumno::class);
     }
+    public function findbyName(string $nombre) : array
+    {
+        return $this->getEntityManager()
+            ->createQuery("select * from App\Entity\Alumno where nombre = :nombre")
+            ->setParameter(":nombre",$nombre)
+            ->getResult();
+
+
+    }
 
 }

@@ -1,0 +1,24 @@
+{% block body %}
+    
+    <table border="2px">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>fecha_nacimiento</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
+                <td>{{ alumno.id }}</td>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.apellidos }}</td>
+                <td>{{ alumno.fecha_nacimiento.format("dd-mm-Y") }}</td>
+                <td>{{ alumno.observaciones }}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

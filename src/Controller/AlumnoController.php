@@ -17,5 +17,13 @@ class AlumnoController extends AbstractController
         return $this->render('alumno/index.html.twig');
     }
 
+    #[Route("/ap1")]
+    public function ap1(AlumnoRepository $alumnoRepository): Response
+    {
+        $alumnos_Maria = $alumnoRepository->findbyName("María");
+        return $this->render("alumno_nombre.html.twig", ["alumnos" => $alumnos_Maria]);
+
+    }
+
 
 }
