@@ -12,11 +12,13 @@
         </thead>
         <tbody>
             {% for alumno in alumnos %}
-                <td>{{ alumno.id }}</td>
-                <td>{{ alumno.nombre }}</td>
-                <td>{{ alumno.apellidos }}</td>
-                <td>{{ alumno.fecha_nacimiento.format("dd-mm-Y") }}</td>
-                <td>{{ alumno.observaciones }}</td>
+                <tr>
+                    <td>{{ alumno.id }}</td>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.apellidos }}</td>
+                    <td>{{ alumno.fechaNacimiento.format("dd-m-Y") }}</td>
+                    <td>{{ alumno.observaciones }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

@@ -15,11 +15,19 @@ class AlumnoRepository extends ServiceEntityRepository
     public function findbyName(string $nombre) : array
     {
         return $this->getEntityManager()
-            ->createQuery("select * from App\Entity\Alumno where nombre = :nombre")
-            ->setParameter(":nombre",$nombre)
+            ->createQuery("select a from App\Entity\Alumno a where a.nombre = :nombre")
+            ->setParameter("nombre",$nombre)
             ->getResult();
 
 
+    }
+
+    public function findByExcludingName(string $nombre)
+    {
+        return $this->getEntityManager()
+            ->createQuery("select a from App\Entity\Alumno a where a.nombre != :nombre")
+            ->setParameter("nombre",$nombre)
+            ->getResult();
     }
 
 }
