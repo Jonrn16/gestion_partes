@@ -24,4 +24,13 @@ class GrupoController extends AbstractController
 
         return $this->render("grupo_general.html.twig", ["cursos" => $grupos]);
     }
+
+    #[Route("/ap9")]
+    public function ap9(GrupoRepository $grupoRepository)
+    {
+        $grupos = $grupoRepository->findAll();
+
+        return $this->render("grupo_general.html.twig", ["cursos" => $grupos]);
+
+    }
 }
