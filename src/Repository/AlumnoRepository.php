@@ -30,4 +30,24 @@ class AlumnoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByFirstSurname(string $apellido)
+    {
+        return $this->getEntityManager()
+            ->createQuery("select a from App\Entity\Alumno a where a.apellidos like :apellido")
+            ->setParameter("apellido","$apellido %")
+            ->getResult();
+        
+    }
+
+    public function findByYear(int $year)
+    {
+        return $this->getEntityManager()
+            ->createQuery("select a from App\Entity\Alumno a where a.fechaNacimiento between :fechaInicio and :fechaFin")
+            ->setParameter("fechaInicio","$year-01-01")
+            ->setParameter("fechaFin","$year-12-31")
+            ->getResult();
+
+
+    }
+
 }

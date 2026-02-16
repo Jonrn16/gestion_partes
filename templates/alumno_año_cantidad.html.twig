@@ -1,0 +1,32 @@
+{% block body %}
+
+    <table border="2px">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>fecha_nacimiento</th>
+            <th>Observaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alumno in alumnos|sort((a,b) => a.fechaNacimiento <=> b.fechaNacimiento) %}
+            <tr>
+                <td>{{ alumno.id }}</td>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.apellidos }}</td>
+                <td>{{ alumno.fechaNacimiento.format("d-m-Y") }}</td>
+                <td>{{ alumno.observaciones }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">Total de alumnos: {{ alumnos|length }}</td>
+        </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}

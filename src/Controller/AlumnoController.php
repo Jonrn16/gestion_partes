@@ -41,5 +41,32 @@ class AlumnoController extends AbstractController
 
     }
 
+    #[Route("/ap4")]
+    public function ap4(AlumnoRepository $alumnoRepository): Response
+    {
+        $alumnos_Ojeda = $alumnoRepository->findByFirstSurname("Ojeda");
+        return $this->render("alumnos_primer_apellido.html.twig", ["alumnos" => $alumnos_Ojeda]);
+    }
+
+    #[Route("/ap5")]
+    public function ap5(AlumnoRepository $alumnoRepository): Response
+    {
+        $alumnos1997 = $alumnoRepository->findByYear(1997);
+        return $this->render("alumno_nombre.html.twig", ["alumnos" => $alumnos1997]);
+    }
+
+    #[Route("/ap6")]
+    public function ap6(AlumnoRepository $alumnoRepository): Response
+    {
+        $alumnos1997 = $alumnoRepository->findByYear(1997);
+        return $this->render("alumno_año_cantidad.html.twig", ["alumnos" => $alumnos1997]);
+    }
+
+    #[Route ("/ap7/{anyo}")]
+    public function ap7(AlumnoRepository $alumnoRepository, int $anyo)
+    {
+        $alumnosAnyo = $alumnoRepository->findByYear($anyo);
+        return $this->render("alumno_año_cantidad.html.twig", ["alumnos" => $alumnosAnyo]);
+    }
 
 }

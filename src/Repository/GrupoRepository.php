@@ -13,4 +13,5 @@ class GrupoRepository extends ServiceEntityRepository
         parent::__construct($registry, Grupo::class);
     }
 
+
 }
