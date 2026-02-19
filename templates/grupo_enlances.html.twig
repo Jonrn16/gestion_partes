@@ -1,0 +1,7 @@
+{% block body %}
+    <ul>
+        {% for grupo in grupos %}
+            <li><a href="/ap10/{{ grupo.id }}/alumnos">{{ grupo.descripcion }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

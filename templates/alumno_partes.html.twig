@@ -1,0 +1,18 @@
+{% block body %}
+     <table border="2px">
+         <thead>
+            <tr>
+                <th>Alumno</th>
+                <th>Nº Partes</th>
+            </tr>
+         </thead>
+         <tbody>
+         {% for alumno in alumnos|sort((a,b) => a.partes|length <=> b.partes|length) %}
+             <tr>
+                 <td>{{ alumno.apellidos }} {{ alumno.nombre }}</td>
+                 <td>{{ alumno.partes|length }}</td>
+             </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+{% endblock %}

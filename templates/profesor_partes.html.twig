@@ -1,0 +1,28 @@
+{% block body %}
+    <table border="2px">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>fecha de creacion</td>
+            <td>avisado</td>
+            <td>Alumno Receptor</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for parte in profesor.partes|sort((a,b) => a.fechaCreacion <=> b.fechaCreacion) %}
+            <tr>
+                <td>{{ parte.id }}</td>
+                <td>{{ parte.fechaCreacion|date("m/d/Y") }}</td>
+                <td>
+                    {% if parte.avisado %}
+                        SI
+                    {% else %}
+                        NO
+                    {% endif %}
+                </td>
+                <td>{{ parte.alumno.nombre }} {{ parte.alumno.apellidos }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -30,7 +30,24 @@ class GrupoController extends AbstractController
     {
         $grupos = $grupoRepository->findAll();
 
-        return $this->render("grupo_general.html.twig", ["cursos" => $grupos]);
+        return $this->render("grupo_ordenado_estudiantes.html.twig", ["cursos" => $grupos]);
 
     }
+
+    #[Route("/ap10")]
+    public function ap10(GrupoRepository $grupoRepository)
+    {
+        $grupos = $grupoRepository->findAll();
+
+        return $this->render("grupo_enlances.html.twig", ["grupos" => $grupos]);
+    }
+
+    #[Route("/ap10/{id}/alumnos")]
+    public function ap10_listado(GrupoRepository $grupoRepository, int $id)
+    {
+        $grupo = $grupoRepository->find($id);
+
+        return $this->render("grupo_listado_alumnos.html.twig",["grupo" => $grupo]);
+
+}
 }

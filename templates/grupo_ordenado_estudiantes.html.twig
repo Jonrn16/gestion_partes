@@ -1,0 +1,20 @@
+{% block body %}
+    <table border="2px">
+        <thead>
+        <tr>
+            <td>Curso</td>
+            <td>Nº Alumnos</td>
+            <td>Tutor</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for curso in cursos|sort((a,b) => a.descripcion <=> b.descripcion) %}
+            <tr>
+                <td>{{ curso.descripcion }}</td>
+                <td>{{ curso.alumnado|length }}</td>
+                <td>{{ curso.tutor.nombre }} {{ curso.tutor.apellidos }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

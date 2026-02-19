@@ -1,0 +1,9 @@
+{% block body %}
+
+    <ul>
+        {% for profesor in profesores %}
+            <li><a href="/ap11/{{ profesor.id }}/partes">{{ profesor.nombre }} {{ profesor.apellidos }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

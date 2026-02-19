@@ -1,0 +1,9 @@
+{% block body %}
+    <h1>Clase de {{ grupo.descripcion }}</h1>
+
+    <ul>
+        {% for alumno in grupo.alumnado|sort((a,b) => a.apellidos <=> b.apellidos) %}
+            <li>{{ alumno.apellidos }} {{ alumno.nombre }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
