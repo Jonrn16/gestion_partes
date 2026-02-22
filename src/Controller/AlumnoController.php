@@ -76,4 +76,12 @@ class AlumnoController extends AbstractController
         return $this->render("alumno_partes.html.twig", ["alumnos" => $alumnos]);
     }
 
+    #[Route("/ap15")]
+    public function ap15(AlumnoRepository $alumnoRepository)
+    {
+        $alumnos = $alumnoRepository->findByNoneParte();
+
+        return $this->render("alumno_nombre.html.twig", ["alumnos" => $alumnos]);
+    }
+
 }

@@ -1,0 +1,9 @@
+{% block body %}
+
+    <ul>
+        {% for profesor in profesores %}
+            <li>{{ profesor.nombre }} {{ profesor.apellidos }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

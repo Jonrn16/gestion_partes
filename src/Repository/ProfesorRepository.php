@@ -16,7 +16,13 @@ class ProfesorRepository extends ServiceEntityRepository
     public function findByNoneparte()
     {
         return $this->getEntityManager()
-            ->createQuery("SELECT p FROM App\Entity\Profesor p LEFT JOIN p.partes part WHERE part IS NULL")
+            ->createQuery("SELECT p 
+FROM App\Entity\Profesor p 
+WHERE p.id NOT IN (
+    SELECT DISTINCT prof.id 
+    FROM App\Entity\Parte part 
+    JOIN part.profesor prof
+)")
             ->getResult();
     }
 }

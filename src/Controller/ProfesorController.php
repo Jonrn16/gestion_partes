@@ -35,7 +35,7 @@ class ProfesorController extends AbstractController
     public function ap14(ProfesorRepository $profesorRepository): Response
     {
         $profesores = $profesorRepository->findByNoneparte();
-        return $this->render("profesor_general.html.twig");
+        return $this->render("profesor_general.html.twig",  ["profesores" => $profesores]);
 
     }
 }
