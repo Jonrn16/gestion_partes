@@ -13,16 +13,24 @@ class ProfesorRepository extends ServiceEntityRepository
         parent::__construct($registry, Profesor::class);
     }
 
+    public function findPartesByProfesor($profesorId) {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select('p', 'a')
+            ->from('App\Entity\Parte', 'p')
+            ->join('p.alumno', 'a')
+            ->where('p.profesor = :prof')
+            ->setParameter('prof', $profesorId)
+            ->orderBy('p.fecha', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findByNoneparte()
     {
-        return $this->getEntityManager()
-            ->createQuery("SELECT p 
-FROM App\Entity\Profesor p 
-WHERE p.id NOT IN (
-    SELECT DISTINCT prof.id 
-    FROM App\Entity\Parte part 
-    JOIN part.profesor prof
-)")
+        return $this->createQueryBuilder('pr')
+            ->leftJoin('pr.partes', 'pa')
+            ->where('pa.id IS NULL')
+            ->getQuery()
             ->getResult();
     }
 }

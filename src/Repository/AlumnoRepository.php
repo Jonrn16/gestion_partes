@@ -15,9 +15,10 @@ class AlumnoRepository extends ServiceEntityRepository
 
     public function findbyName(string $nombre): array
     {
-        return $this->getEntityManager()
-            ->createQuery("select a from App\Entity\Alumno a where a.nombre = :nombre")
-            ->setParameter("nombre", $nombre)
+        return $this->createQueryBuilder('a')
+            ->where('a.nombre = :nombre')
+            ->setParameter('nombre', $nombre)
+            ->getQuery()
             ->getResult();
 
 
@@ -25,27 +26,30 @@ class AlumnoRepository extends ServiceEntityRepository
 
     public function findByExcludingName(string $nombre)
     {
-        return $this->getEntityManager()
-            ->createQuery("select a from App\Entity\Alumno a where a.nombre != :nombre")
-            ->setParameter("nombre", $nombre)
+        return $this->createQueryBuilder('a')
+            ->where('a.nombre != :nombre')
+            ->setParameter('nombre', $nombre)
+            ->getQuery()
             ->getResult();
     }
 
     public function findByFirstSurname(string $apellido)
     {
-        return $this->getEntityManager()
-            ->createQuery("select a from App\Entity\Alumno a where a.apellidos like :apellido")
-            ->setParameter("apellido", "$apellido %")
+        return $this->createQueryBuilder('a')
+            ->where('a.apellido1 = :ape')
+            ->setParameter('ape', $apellido)
+            ->orderBy('a.nombre', 'ASC')
+            ->getQuery()
             ->getResult();
 
     }
 
     public function findByYear(int $year)
     {
-        return $this->getEntityManager()
-            ->createQuery("select a from App\Entity\Alumno a where a.fechaNacimiento between :fechaInicio and :fechaFin")
-            ->setParameter("fechaInicio", "$year-01-01")
-            ->setParameter("fechaFin", "$year-12-31")
+        return $this->createQueryBuilder('a')
+            ->where('YEAR(a.fechaNacimiento) = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
             ->getResult();
 
 
@@ -53,8 +57,10 @@ class AlumnoRepository extends ServiceEntityRepository
 
     public function findByNoneParte()
     {
-        return $this->getEntityManager()
-            ->createQuery("SELECT a FROM App\Entity\Alumno a WHERE a.id NOT IN (SELECT alumno.id FROM App\Entity\Parte part JOIN part.alumno alumno)")
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.partes', 'p')
+            ->where('p.id IS NULL')
+            ->getQuery()
             ->getResult();
     }
 

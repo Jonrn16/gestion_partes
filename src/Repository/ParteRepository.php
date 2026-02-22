@@ -15,9 +15,10 @@ class ParteRepository extends ServiceEntityRepository
 
     public function findByTexts(string $texto)
     {
-        return $this->getEntityManager()
-            ->createQuery("select p from \Entity\Parte p where p.observaciones like :texto")
-            ->setParameter("texto", "%" . $texto . "%")
+        return $this->createQueryBuilder('p')
+            ->where('p.observaciones LIKE :texto')
+            ->setParameter('texto', '%'.$texto.'%')
+            ->getQuery()
             ->getResult();
     }
 
